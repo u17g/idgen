@@ -1,0 +1,17 @@
+{
+  "name": "@u17g/idgen",
+  "version": "1.0.0",
+  "exports": {
+    "./prefixed": "./src/prefixed.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
