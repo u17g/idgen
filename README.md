@@ -28,3 +28,17 @@ const userId = genUserId(); // user_xxxxxxx
 // or
 const userId = generate("user"); // user_xxxxxx
 ```
+
+## Publish (for maintainers)
+
+```sh
+# 1) login (one-time)
+bunx npm whoami || bunx npm login
+
+# 2) test & build
+bun test
+bun run build
+
+# 3) publish to npm (scoped packages need access=public)
+bun publish --access public
+```

@@ -27,7 +27,7 @@ export type Options = {
   /**
    * @default crypto.randomBytes
    */
-  randomBytes?: (length: number) => Buffer<ArrayBufferLike>;
+  randomBytes?: (length: number) => Uint8Array;
 
   /**
    * @default true

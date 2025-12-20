@@ -2,16 +2,27 @@
   "name": "@u17g/idgen",
   "version": "1.0.0",
   "exports": {
-    "./prefixed": "./src/prefixed.ts"
+    "./prefixed": {
+      "types": "./dist/prefixed.d.ts",
+      "import": "./dist/prefixed.js"
+    }
   },
   "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "test": "bun test"
+    "test": "bun test",
+    "build": "bun x tsc -p tsconfig.build.json",
+    "prepublishOnly": "bun test && bun run build"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "typescript": "^5.0.0"
   },
-  "peerDependencies": {
-    "typescript": "^5"
+  "publishConfig": {
+    "access": "public"
   }
 }
