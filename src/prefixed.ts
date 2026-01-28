@@ -49,7 +49,13 @@ function generateVerifyToken(id: string, key: string, length: number): string {
 }
 
 export type VerifyTokenParams = {
+  /**
+   * should be >= 12 for tamper detection.
+   */
   length: number;
+  /**
+   * secret key to generate the token. keep it secret.
+   */
   key: string;
 }
 export type Options = {
