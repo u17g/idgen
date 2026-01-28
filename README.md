@@ -29,6 +29,25 @@ const userId = genUserId(); // user_xxxxxxx
 const userId = generate("user"); // user_xxxxxx
 ```
 
+## Prefixed ID with self-verifying token.
+
+Enable a self-verifying token suffix. The token is derived from the
+ID body and a secret key, so you can later verify the token integrity.
+
+```ts
+import { generate, verify } from "@u17g/idgen/prefixed";
+
+const params = { length: 12, key: process.env.IDGEN_KEY! };
+const id = generate("user", { includeVerifyToken: params });
+
+verify(id, params); // true
+```
+
+Notes:
+
+- Keep the key secret; rotate if exposed.
+- Prefer `length` >= 12 for tamper detection; 16 is stronger.
+
 ## Publish (for maintainers)
 
 ```sh
