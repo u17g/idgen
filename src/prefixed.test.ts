@@ -1,5 +1,5 @@
 import { describe, it, expect } from "bun:test";
-import { generate } from "./prefixed";
+import { generate, verify } from "./prefixed";
 
 describe("prefixed", () => {
   it("should generate an id", () => {
@@ -67,5 +67,24 @@ describe("prefixed", () => {
 
     // The timestamp sort order should match creation order
     expect(sortedByTimestamp.map((e) => e.order)).toEqual(entries.map((e) => e.order));
+  });
+
+  it("should verify ids with a token", () => {
+    const params = { length: 6, key: "secret" };
+    const id = generate("test", { includeVerifyToken: params });
+    expect(verify(id, params)).toBe(true);
+  });
+
+  it("should reject tampered tokens", () => {
+    const params = { length: 6, key: "secret" };
+    const id = generate("test", { includeVerifyToken: params });
+    const tampered = id.slice(0, -1) + (id.endsWith("0") ? "1" : "0");
+    expect(verify(tampered, params)).toBe(false);
+  });
+
+  it("should reject tokens with wrong key", () => {
+    const params = { length: 6, key: "secret" };
+    const id = generate("test", { includeVerifyToken: params });
+    expect(verify(id, { ...params, key: "other" })).toBe(false);
   });
 });
